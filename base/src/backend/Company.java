@@ -6,13 +6,13 @@ package backend;
 import javax.swing.Icon;
 import java.util.Date;
 
-/*
+/**
     Interface for a company unit.
 
     @author Denis Yakovlev
     @version October 08 2018
- */
-public interface InterfaceCompany {
+*/
+public interface Company {
 
     /**
      * Returns a name of this company.
@@ -78,6 +78,13 @@ public interface InterfaceCompany {
     Date getApplicationDate();
 
     /**
+     * Returns a client comment on this company.
+     *
+     * @return a client comment on this company
+     */
+    String getComment();
+
+    /**
      * Sets the first application try to this company.
      */
     void setTryNumber();
@@ -125,4 +132,10 @@ public interface InterfaceCompany {
      */
     void setApplicationDate(Date theAppDate);
 
+    /**
+     * Sets a client comment on this company.
+     *
+     * @param theComment a client comment on this company
+     */
+    void setComment(String theComment);
 }

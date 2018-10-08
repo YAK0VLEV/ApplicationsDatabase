@@ -9,13 +9,13 @@ import java.util.Date;
 import java.time.*;
 
 
-/*
+/**
     An Abstract super class a company unit.
 
     @author Denis Yakovlev
     @version October 08 2018
- */
-public abstract class AbstractCompany implements InterfaceCompany {
+*/
+public abstract class AbstractCompany implements Company {
 
     /**
      * A number of tries to apply to this company.
@@ -53,6 +53,11 @@ public abstract class AbstractCompany implements InterfaceCompany {
     private Date myApplicationDate;
 
     /**
+     * A client comment on this company.
+     */
+    private String myComment;
+
+    /**
      * A name of this company.
      */
     private String myCompanyName;
@@ -70,6 +75,7 @@ public abstract class AbstractCompany implements InterfaceCompany {
      */
     public AbstractCompany(final String theName,
                            final Icon theIcon) {
+
         myCompanyName = theName;
         myCompanyIcon = theIcon;
         myTryNumber = 0;
@@ -82,6 +88,7 @@ public abstract class AbstractCompany implements InterfaceCompany {
         LocalDateTime now = LocalDateTime.now();
         myApplicationDate = java.util.Date
                             .from(now.atZone(ZoneId.systemDefault()).toInstant());
+        myComment = "";
     }
 
     /**
@@ -175,6 +182,16 @@ public abstract class AbstractCompany implements InterfaceCompany {
     }
 
     /**
+     * Returns a client comment on this company.
+     *
+     * @return a client comment on this company
+     */
+    @Override
+    public String getComment() {
+        return myComment;
+    }
+
+    /**
      * Sets the first application try to this company.
      */
     @Override
@@ -244,5 +261,15 @@ public abstract class AbstractCompany implements InterfaceCompany {
     @Override
     public void setApplicationDate(Date theAppDate) {
         myApplicationDate = theAppDate;
+    }
+
+    /**
+     * Sets a client comment on this company.
+     *
+     * @param theComment a client comment on this company
+     */
+    @Override
+    public void setComment(String theComment) {
+        myComment = theComment;
     }
 }
