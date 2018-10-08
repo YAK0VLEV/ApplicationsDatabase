@@ -1,15 +1,32 @@
+
 /* A database for tracking companies in which the application was submitted */
+
+package backend;
 
 import javax.swing.Icon;
 import java.util.Date;
 
 /*
-Interface for a company unit.
+    Interface for a company unit.
 
-@author Denis Yakovlev
-@version October 08 2018
+    @author Denis Yakovlev
+    @version October 08 2018
  */
 public interface InterfaceCompany {
+
+    /**
+     * Returns a name of this company.
+     *
+     * @return a name of this company
+     */
+    String getName();
+
+    /**
+     * Returns an icon of this company.
+     *
+     * @return an icon of this company
+     */
+    Icon getIcon();
 
     /**
      * Returns a number of tries to apply to this company.
@@ -54,11 +71,16 @@ public interface InterfaceCompany {
     boolean isOnsiteInterview();
 
     /**
-     * Returns a date when an application was cent to this company.
+     * Returns a date when an application was sent to this company.
      *
-     * @return a date when an application was cent to this company
+     * @return a date when an application was sent to this company
      */
     Date getApplicationDate();
+
+    /**
+     * Sets the first application try to this company.
+     */
+    void setTryNumber();
 
     /**
      * Sets a number of tries to apply to this company.
@@ -82,46 +104,25 @@ public interface InterfaceCompany {
     void setRequirements(String theRequirementsList);
 
     /**
-     * Sets if there was a response from this company.
-     *
-     * @param theResponded is boolean if there was a response from this company
+     * Confirms that there was a response from this company.
      */
-    void setIsResponded(int theResponded);
+    void responded();
 
     /**
-     * Sets if there was a phone interview with this company.
-     *
-     * @param thePhoneInterview is boolean if there was a phone interview with this company
+     * Confirms that there was a phone interview with this company.
      */
-    void setIsPhoneInterview(int thePhoneInterview);
+    void phoneInterview();
 
     /**
-     * Sets if there was an on-site interview with this company.
-     *
-     * @param theOnsiteInterview is boolean if there was an on-site interview with this company
+     * Confirms that there was an on-site interview with this company.
      */
-    void setIsOnsiteInterview(int theOnsiteInterview);
+    void onsiteInterview();
 
     /**
-     * Sets a date when an application was cent to this company.
+     * Sets a date when an application was sent to this company.
      *
-     * @param theAppDate is a date when an application was cent to this company
+     * @param theAppDate is a date when an application was sent to this company
      */
     void setApplicationDate(Date theAppDate);
-
-    /**
-     * Returns a name of this company.
-     *
-     * @return a name of this company
-     */
-    String getName();
-
-
-    /**
-     * Returns an icon of this company.
-     *
-     * @return an icon of this company
-     */
-    Icon getIcon();
 
 }
