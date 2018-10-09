@@ -21,11 +21,19 @@ public class StandardCompany extends AbstractCompany {
      * Default Constructor for a new company.
      */
     public StandardCompany() {
+
         this("Company", new ImageIcon("images/StandardCompanyIcon.gif"));
-    }
+    } // end default constructor
 
     /**
-     * Constructs a new company.
+     * A Constructor for an entry w/o an icon for a new company.
+     */
+    public StandardCompany(final String theCompany) {
+        this(theCompany, new ImageIcon("images/StandardCompanyIcon.gif"));
+    } // emd constructor
+
+    /**
+     * Primary constructor to construct a new company.
      *
      * @param theName is a name for the given company
      * @param theIcon is an icon for the given company
@@ -33,6 +41,6 @@ public class StandardCompany extends AbstractCompany {
     public StandardCompany(final String theName,
                            final Icon theIcon) {
         super(theName, theIcon);
-    }
+    } // end primary constructor
 
-}
+} // end class
