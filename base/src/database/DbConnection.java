@@ -159,33 +159,9 @@ public class DbConnection {
             mySelect = myQuery.executeQuery("SELECT * FROM " + theStatement);
             System.out.println("Select operation done successfully");
 
-
-            int numberOfEntries = 1;
-            while ( mySelect.next() ) {
-                int digit = mySelect.getInt("digit");
-                String title = mySelect.getString("title");
-
-                System.out.println();
-                System.out.print(numberOfEntries + "\tDigit = " + digit);
-                System.out.print("\tTitle = " + title);
-                numberOfEntries++;
-            }
-            System.out.println();
-
-            /* while ( mySelect.next() ) {
-                int id = mySelect.getInt("id");
-                String name = mySelect.getString("name");
-                int age = mySelect.getInt("age");
-                String address = mySelect.getString("address");
-                float salary = mySelect.getFloat("salary");
-
-                System.out.println("ID = " + id);
-                System.out.println("NAME = " + name);
-                System.out.println("AGE = " + age);
-                System.out.println("ADDRESS = " + address);
-                System.out.println("SALARY = " + salary);
-                System.out.println();
-            } */
+            // call for the method printing in console
+            // testing purposes, will be turned off after gui will be created
+            printToConsole();
 
             // close query and select, commit and close db connection
             closeDbConnection();
@@ -293,5 +269,47 @@ public class DbConnection {
             System.exit(0);
         }
     } // end closeDbConnection
+
+    /**
+     * Helper method to print selected entries to the console.
+     */
+    private void printToConsole() {
+
+        try {
+            int numberOfEntries = 1;
+            while ( mySelect.next() ) {
+                int digit = mySelect.getInt("digit");
+                String title = mySelect.getString("title");
+
+                System.out.println();
+                System.out.print(numberOfEntries + "\tDigit = " + digit);
+                System.out.print("\tTitle = " + title);
+                numberOfEntries++;
+            }
+            System.out.println();
+
+        } catch (Exception e) {
+            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+            System.exit(0);
+        }
+
+
+            /* while ( mySelect.next() ) {
+                int id = mySelect.getInt("id");
+                String name = mySelect.getString("name");
+                int age = mySelect.getInt("age");
+                String address = mySelect.getString("address");
+                float salary = mySelect.getFloat("salary");
+
+                System.out.println("ID = " + id);
+                System.out.println("NAME = " + name);
+                System.out.println("AGE = " + age);
+                System.out.println("ADDRESS = " + address);
+                System.out.println("SALARY = " + salary);
+                System.out.println();
+            } */
+
+
+    } // end printToConsole
 
 } // end class
