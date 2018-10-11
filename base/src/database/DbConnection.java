@@ -160,15 +160,17 @@ public class DbConnection {
             System.out.println("Select operation done successfully");
 
 
+            int numberOfEntries = 1;
             while ( mySelect.next() ) {
                 int digit = mySelect.getInt("digit");
                 String title = mySelect.getString("title");
 
                 System.out.println();
-                System.out.println("Digit = " + digit);
-                System.out.println("Title = " + title);
-                System.out.println();
+                System.out.print(numberOfEntries + "\tDigit = " + digit);
+                System.out.print("\tTitle = " + title);
+                numberOfEntries++;
             }
+            System.out.println();
 
             /* while ( mySelect.next() ) {
                 int id = mySelect.getInt("id");
