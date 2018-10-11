@@ -238,4 +238,33 @@ public class DbConnection {
         }
     } // end updateQuery
 
+    /**
+     * Delete a database entry.
+     */
+    public void deleteQuery(String theStatement) {
+
+        try {
+
+            // open db connection
+            myConnect = DriverManager.getConnection("jdbc:sqlite:" + myDbPath);
+            myConnect.setAutoCommit(false);
+            System.out.println("Opened database successfully");
+
+            // make a query
+            myQuery = myConnect.createStatement();
+            myDelete = "DELETE FROM " + theStatement;
+            myQuery.executeUpdate(myDelete);
+            System.out.println("Record delete successfully");
+
+            // close query, commit and close db connection
+            myQuery.close();
+            myConnect.commit();
+            myConnect.close();
+
+        } catch (Exception e) {
+            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+            System.exit(0);
+        }
+    } // end deleteQuery
+
 } // end class

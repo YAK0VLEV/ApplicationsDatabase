@@ -94,14 +94,27 @@ public class CompanyMain {
         newEntryData = String.format("test VALUES (%d, %s);", 15, "\"seco\"");
         db.insertQuery(newEntryData);
 
+        System.out.println("==============    1    =============");
 
         // DISPLAY DB CONTENT
         String newSelect = "test;";
         db.selectQuery(newSelect);
 
-        // UPDATE 1ST ENTRY
+        System.out.println("=============    2    ==============");
+
+        // UPDATE ENTRIES WHERE digit == 1
         String newUpdate = "test SET title = \"how are you\" where digit = 1;";
         db.updateQuery(newUpdate);
+
+        // DISPLAY DB CONTENT
+        newSelect = "test;";
+        db.selectQuery(newSelect);
+
+        System.out.println("===========    3     ================");
+
+        // DELETE ENTRIES WHERE digit == 1
+        String newDelete = "test where digit = 1;";
+        db.deleteQuery(newDelete);
 
         // DISPLAY DB CONTENT
         newSelect = "test;";
