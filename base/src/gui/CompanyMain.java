@@ -69,8 +69,11 @@ public class CompanyMain {
 
 
 
+                    // CHECK field for company name should not be UNIQUE
+                    // id for the company (I think) can be / must be  UNIQUE
+
                     /*"CREATE TABLE companies " +
-                    "(CompanyName VARCHAR(255) PRIMARY KEY  NOT NULL UNIQUE," +
+                    "(CompanyName VARCHAR(255) PRIMARY KEY  NOT NULL," +
                     " ApplicationDate NUMERIC       NOT NULL, " +
                     " TryNumber INTEGER     NOT NULL, " +
                     " PositionName        CHAR(255), " +

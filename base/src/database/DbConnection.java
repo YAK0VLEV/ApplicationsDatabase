@@ -78,16 +78,14 @@ public class DbConnection {
 
 
         try {
-            // open db connection
+            // SQLite driver
             Class.forName("org.sqlite.JDBC");
 
-            myConnect = DriverManager.getConnection("jdbc:sqlite:" + theDbURL);
-            myConnect.setAutoCommit(false);
-            System.out.println("Opened database successfully");
+            // open db connection
+            establishDbConnection();
 
             // commit and close db connection
-            myConnect.commit();
-            myConnect.close();
+            closeDbConnection();
 
         } catch (Exception e) {
             System.err.println( e.getClass().getName() + ": " + e.getMessage() );
@@ -103,9 +101,7 @@ public class DbConnection {
 
         try {
             // open db connection
-            myConnect = DriverManager.getConnection("jdbc:sqlite:" + myDbPath);
-            myConnect.setAutoCommit(false);
-            System.out.println("Opened database successfully");
+            establishDbConnection();
 
             // make a query
             myQuery = myConnect.createStatement();
@@ -114,9 +110,7 @@ public class DbConnection {
             System.out.println("Table created successfully");
 
             // close query, commit and close db connection
-            myQuery.close();
-            myConnect.commit();
-            myConnect.close();
+            closeDbConnection();
 
         } catch (Exception e) {
             System.err.println( e.getClass().getName() + ": " + e.getMessage() );
@@ -132,9 +126,7 @@ public class DbConnection {
         try {
 
             // open db connection
-            myConnect = DriverManager.getConnection("jdbc:sqlite:" + myDbPath);
-            myConnect.setAutoCommit(false);
-            System.out.println("Opened database successfully");
+            establishDbConnection();
 
             // make a query
             myQuery = myConnect.createStatement();
@@ -143,9 +135,7 @@ public class DbConnection {
             System.out.println("Record created successfully");
 
             // close query, commit and close db connection
-            myQuery.close();
-            myConnect.commit();
-            myConnect.close();
+            closeDbConnection();
 
         } catch (Exception e) {
             System.err.println( e.getClass().getName() + ": " + e.getMessage() );
@@ -162,9 +152,7 @@ public class DbConnection {
         try {
 
             // open db connection
-            myConnect = DriverManager.getConnection("jdbc:sqlite:" + myDbPath);
-            myConnect.setAutoCommit(false);
-            System.out.println("Opened database successfully");
+            establishDbConnection();
 
             // make a query
             myQuery = myConnect.createStatement();
@@ -198,10 +186,7 @@ public class DbConnection {
             } */
 
             // close query and select, commit and close db connection
-            myQuery.close();
-            mySelect.close();
-            myConnect.commit();
-            myConnect.close();
+            closeDbConnection();
 
         } catch (Exception e) {
             System.err.println( e.getClass().getName() + ": " + e.getMessage() );
@@ -217,9 +202,7 @@ public class DbConnection {
         try {
 
             // open db connection
-            myConnect = DriverManager.getConnection("jdbc:sqlite:" + myDbPath);
-            myConnect.setAutoCommit(false);
-            System.out.println("Opened database successfully");
+            establishDbConnection();
 
             // make a query
             myQuery = myConnect.createStatement();
@@ -228,9 +211,7 @@ public class DbConnection {
             System.out.println("Record updated successfully");
 
             // close query, commit and close db connection
-            myQuery.close();
-            myConnect.commit();
-            myConnect.close();
+            closeDbConnection();
 
         } catch (Exception e) {
             System.err.println( e.getClass().getName() + ": " + e.getMessage() );
@@ -246,9 +227,7 @@ public class DbConnection {
         try {
 
             // open db connection
-            myConnect = DriverManager.getConnection("jdbc:sqlite:" + myDbPath);
-            myConnect.setAutoCommit(false);
-            System.out.println("Opened database successfully");
+            establishDbConnection();
 
             // make a query
             myQuery = myConnect.createStatement();
@@ -257,14 +236,60 @@ public class DbConnection {
             System.out.println("Record delete successfully");
 
             // close query, commit and close db connection
-            myQuery.close();
-            myConnect.commit();
-            myConnect.close();
+            closeDbConnection();
 
         } catch (Exception e) {
             System.err.println( e.getClass().getName() + ": " + e.getMessage() );
             System.exit(0);
         }
     } // end deleteQuery
+
+    /**
+     * Helper method to establish a connection with a database
+     */
+    private void establishDbConnection() {
+
+        try {
+
+            // open db connection
+            myConnect = DriverManager.getConnection("jdbc:sqlite:" + myDbPath);
+            myConnect.setAutoCommit(false);
+            System.out.println("Opened database successfully");
+
+        } catch (Exception e) {
+            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+            System.exit(0);
+        }
+    } // end establishDbConnection
+
+    /**
+     * Helper method to close a connection with the database
+     */
+    private void closeDbConnection() {
+
+        try {
+
+            // close query, commit and close db connection
+            if (myQuery != null) {
+                myQuery.close();
+            }
+
+            if (mySelect != null) {
+                mySelect.close();
+            }
+
+            if (myConnect != null) {
+                myConnect.commit();
+            }
+
+            if (myConnect != null) {
+                myConnect.close();
+            }
+
+        } catch (Exception e) {
+            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+            System.exit(0);
+        }
+    } // end closeDbConnection
 
 } // end class
