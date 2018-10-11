@@ -40,28 +40,37 @@ public class CompanyMain {
 
         // CREATE 1 TABLE
         // string includes a new table name and the statement with column to create itself
-        String newTable = "test (NUM INTEGER);";
+        String newTable = "test (digit INTEGER, title TEXT);";
 
         System.out.println("TEST 3");
         db.createTable(newTable);
 
         System.out.println("TEST 4");
 
-        // CREATE 2ND TABLE
+        // CREATE 2ND TABLE - to check if it handles an existing table with the same name
         // string includes a new table name and the statement with column to create itself
-        newTable = "company (NUM INTEGER);";
+        newTable = "test (NUM INTEGER);";
 
         System.out.println("TEST 5");
         db.createTable(newTable);
 
         System.out.println("TEST 6");
 
+        // CREATE 3RD TABLE
+        // string includes a new table name and the statement with column to create itself
+        newTable = "company (digit INTEGER, companyName TEXT);";
+
+        System.out.println("TEST 7");
+        db.createTable(newTable);
+
+        System.out.println("TEST 8");
+
         // NEED TO SEE OUTPUT!!!!
 
 
 
                     /*"CREATE TABLE companies " +
-                    "(CompanyName VARCHAR(255) PRIMARY KEY  NOT NULL," +
+                    "(CompanyName VARCHAR(255) PRIMARY KEY  NOT NULL UNIQUE," +
                     " ApplicationDate NUMERIC       NOT NULL, " +
                     " TryNumber INTEGER     NOT NULL, " +
                     " PositionName        CHAR(255), " +
@@ -73,11 +82,19 @@ public class CompanyMain {
 
 
         // string includes a new table name and the statement with column to create itself
-         String newEntryData = "test VALUES (1);";
+         String newEntryData = "test VALUES (1, \"fir\");";
 
-        System.out.println("TEST 7");
+        System.out.println("TEST 9");
         db.insertQuery(newEntryData);
 
-        System.out.println("TEST 8");
+        System.out.println("TEST 10");
+
+        newEntryData = String.format("test VALUES (%d, %s);", 15, "\"seco\"");
+        db.insertQuery(newEntryData);
+
+
+        String newSelect = "test;";
+        db.selectQuery(newSelect);
+
     } // end main
 } // end class

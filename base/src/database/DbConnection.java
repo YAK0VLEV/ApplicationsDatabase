@@ -109,8 +109,8 @@ public class DbConnection {
 
             // make a query
             myQuery = myConnect.createStatement();
-            myCreateTable = "CREATE TABLE " + theStatement;
-            myQuery.executeUpdate(myCreateTable);
+            myCreateTable = "CREATE TABLE IF NOT EXISTS " + theStatement; // need to provide a response to a user
+            myQuery.executeUpdate(myCreateTable);                         // if a table with that name already exists
             System.out.println("Table created successfully");
 
             // close query, commit and close db connection
@@ -153,5 +153,59 @@ public class DbConnection {
         }
     } // end insertQuery
 
+
+    /**
+     * Inserts a new entry into a table.
+     */
+    public void selectQuery(String theStatement) {
+
+        try {
+
+            // open db connection
+            myConnect = DriverManager.getConnection("jdbc:sqlite:" + myDbPath);
+            myConnect.setAutoCommit(false);
+            System.out.println("Opened database successfully");
+
+            // make a query
+            myQuery = myConnect.createStatement();
+            mySelect = myQuery.executeQuery("SELECT * FROM " + theStatement);
+            System.out.println("Select operation done successfully");
+
+
+            while ( mySelect.next() ) {
+                int digit = mySelect.getInt("digit");
+                String title = mySelect.getString("title");
+
+                System.out.println("ID = " + digit);
+                System.out.println("NAME = " + title);
+                System.out.println();
+            }
+
+            /* while ( mySelect.next() ) {
+                int id = mySelect.getInt("id");
+                String name = mySelect.getString("name");
+                int age = mySelect.getInt("age");
+                String address = mySelect.getString("address");
+                float salary = mySelect.getFloat("salary");
+
+                System.out.println("ID = " + id);
+                System.out.println("NAME = " + name);
+                System.out.println("AGE = " + age);
+                System.out.println("ADDRESS = " + address);
+                System.out.println("SALARY = " + salary);
+                System.out.println();
+            } */
+
+            // close query, commit and close db connection
+            myQuery.close();
+            mySelect.close();
+            myConnect.commit();
+            myConnect.close();
+
+        } catch (Exception e) {
+            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+            System.exit(0);
+        }
+    } // end selectQuery
 
 } // end class
