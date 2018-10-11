@@ -155,7 +155,7 @@ public class DbConnection {
 
 
     /**
-     * Inserts a new entry into a table.
+     * Get an entry/entries from database.
      */
     public void selectQuery(String theStatement) {
 
@@ -176,8 +176,9 @@ public class DbConnection {
                 int digit = mySelect.getInt("digit");
                 String title = mySelect.getString("title");
 
-                System.out.println("ID = " + digit);
-                System.out.println("NAME = " + title);
+                System.out.println();
+                System.out.println("Digit = " + digit);
+                System.out.println("Title = " + title);
                 System.out.println();
             }
 
@@ -196,7 +197,7 @@ public class DbConnection {
                 System.out.println();
             } */
 
-            // close query, commit and close db connection
+            // close query and select, commit and close db connection
             myQuery.close();
             mySelect.close();
             myConnect.commit();
@@ -207,5 +208,34 @@ public class DbConnection {
             System.exit(0);
         }
     } // end selectQuery
+
+    /**
+     * Update a database entry.
+     */
+    public void updateQuery(String theStatement) {
+
+        try {
+
+            // open db connection
+            myConnect = DriverManager.getConnection("jdbc:sqlite:" + myDbPath);
+            myConnect.setAutoCommit(false);
+            System.out.println("Opened database successfully");
+
+            // make a query
+            myQuery = myConnect.createStatement();
+            myUpdate = "UPDATE " + theStatement;
+            myQuery.executeUpdate(myUpdate);
+            System.out.println("Record updated successfully");
+
+            // close query, commit and close db connection
+            myQuery.close();
+            myConnect.commit();
+            myConnect.close();
+
+        } catch (Exception e) {
+            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+            System.exit(0);
+        }
+    } // end updateQuery
 
 } // end class

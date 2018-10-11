@@ -81,10 +81,12 @@ public class CompanyMain {
                     " MyComment CHAR(255))";*/
 
 
+        // ADDING 2 ENTRIES
         // string includes a new table name and the statement with column to create itself
-         String newEntryData = "test VALUES (1, \"fir\");";
+        String newEntryData = "test VALUES (1, \"fir\");";
 
         System.out.println("TEST 9");
+
         db.insertQuery(newEntryData);
 
         System.out.println("TEST 10");
@@ -93,7 +95,16 @@ public class CompanyMain {
         db.insertQuery(newEntryData);
 
 
+        // DISPLAY DB CONTENT
         String newSelect = "test;";
+        db.selectQuery(newSelect);
+
+        // UPDATE 1ST ENTRY
+        String newUpdate = "test SET title = \"how are you\" where digit = 1;";
+        db.updateQuery(newUpdate);
+
+        // DISPLAY DB CONTENT
+        newSelect = "test;";
         db.selectQuery(newSelect);
 
     } // end main
