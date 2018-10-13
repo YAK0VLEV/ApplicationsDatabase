@@ -7,15 +7,20 @@ import backend.Company;
 import backend.StandardCompany;
 
 import database.DbConnection;
-import java.sql.*;
+
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
 /**
  * Runs Applications Database by instantiating and starting the CompanyGUI.
  *
  * @author Denis Yakovlev
- * @version October 09 2018
+ * @version October 13 2018
  */
-public class CompanyMain {
+public class CompanyMain extends Application {
 
     /**
      * Driver Method.
@@ -23,6 +28,44 @@ public class CompanyMain {
      * @param args - command line arguments
      */
     public static void main(String[] args) {
+
+
+        launch(args);
+
+        // for testing functionality in console
+        //consoleTests();
+
+        // CHECK field for company name should not be UNIQUE
+        // id for the company (I think) can be / must be  UNIQUE
+
+                    /*"CREATE TABLE companies " +
+                    "(CompanyName VARCHAR(255) PRIMARY KEY  NOT NULL," +
+                    " ApplicationDate NUMERIC       NOT NULL, " +
+                    " TryNumber INTEGER     NOT NULL, " +
+                    " PositionName        CHAR(255), " +
+                    " Requirements         CHAR(255), " +
+                    " Response INTEGER     NOT NULL, " +
+                    " PhoneInterview INTEGER     NOT NULL, " +
+                    " OnSiteInterview INTEGER     NOT NULL, " +
+                    " MyComment CHAR(255))";*/
+
+    } // end main
+
+    /**
+     *
+     */
+    @Override
+    public void start(Stage primaryStage) throws Exception{
+        Parent root = FXMLLoader.load(getClass().getResource("view.fxml"));
+        primaryStage.setTitle("test by using OpenJDK + OpenJFX");
+        primaryStage.setScene(new Scene(root, 300, 275));
+        primaryStage.show();
+    } // end start
+
+    /**
+     * Main method to test the functionality in the console
+     */
+    private static void consoleTests() {
 
         System.out.println();
 
@@ -65,24 +108,6 @@ public class CompanyMain {
 
         System.out.println("TEST 8");
 
-        // NEED TO SEE OUTPUT!!!!
-
-
-
-                    // CHECK field for company name should not be UNIQUE
-                    // id for the company (I think) can be / must be  UNIQUE
-
-                    /*"CREATE TABLE companies " +
-                    "(CompanyName VARCHAR(255) PRIMARY KEY  NOT NULL," +
-                    " ApplicationDate NUMERIC       NOT NULL, " +
-                    " TryNumber INTEGER     NOT NULL, " +
-                    " PositionName        CHAR(255), " +
-                    " Requirements         CHAR(255), " +
-                    " Response INTEGER     NOT NULL, " +
-                    " PhoneInterview INTEGER     NOT NULL, " +
-                    " OnSiteInterview INTEGER     NOT NULL, " +
-                    " MyComment CHAR(255))";*/
-
 
         // ADDING 2 ENTRIES
         // string includes a new table name and the statement with column to create itself
@@ -123,5 +148,6 @@ public class CompanyMain {
         newSelect = "test;";
         db.selectQuery(newSelect);
 
-    } // end main
+    } // end consoleTests
+
 } // end class
