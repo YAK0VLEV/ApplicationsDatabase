@@ -1,2 +1,2 @@
-# ApplicationsDatabase
-Database of sent job applications
+# Database
+Helpful Database
